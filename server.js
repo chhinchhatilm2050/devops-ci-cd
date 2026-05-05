@@ -60,7 +60,8 @@ app.get('/users/:id', (req, res) => {
   if (!user) {
     return res.status(404).json({ error: 'User not found' });
   }
-  res.json({ userffffssssss });
+  console.log(user);
+  res.json({ user });
 });
 
 const PORT = process.env.PORT || 3000;
