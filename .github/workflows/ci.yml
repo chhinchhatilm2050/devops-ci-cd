@@ -3,9 +3,13 @@ name: CI Pipeline
 # Trigger on push and pull requests to main branch
 on:
   push:
-    branches: ['**']
+    branches: [master, develop, feature/**]
   pull_request:
     branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -29,7 +33,7 @@ jobs:
       
       # Step 3: Install dependencies
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       
       # Step 4: Run linter
       - name: Lint code
