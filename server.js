@@ -61,6 +61,7 @@ app.get('/users/:id', (req, res) => {
     return res.status(404).json({ error: 'User not found' });
   }
   console.log(user);
+  console.log("helloword");
   res.json({ user });
 });
 
