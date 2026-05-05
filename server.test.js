@@ -30,7 +30,7 @@ describe('Express API Tests', () => {
         .send({ operation: 'subtract', a: 10, b: 4 });
       
       expect(response.status).toBe(200);
-      expect(response.body.result).toBe(5);
+      expect(response.body.result).toBe(6);
     });
     
     it('should multiply two numbers', async () => {
