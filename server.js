@@ -52,7 +52,7 @@ const users = [
 ];
 
 app.get('/users', (req, res) => {
-  res.json({ users });
+  res.json({ userssss });
 });
 
 app.get('/users/:id', (req, res) => {
