@@ -1,8 +1,14 @@
 name: CI Pipeline
 
 on:
-  pull_request:        # ← ONLY this, remove push completely
-    branches: [master]
+  push:
+    branches: [develop, feature/**] 
+  pull_request:
+    branches: [master]               
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
 
 jobs:
   test:
