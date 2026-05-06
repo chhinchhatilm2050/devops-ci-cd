@@ -1,0 +1,23 @@
+services:
+  express:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: express-container
+    command: npx nodemon src/server.js
+    volumes:
+      - ./src:/app/src
+      - ./.env:/app/.env
+    ports:
+      - 3000:3000
+
+  database:
+    image: mongo:8.2.7-noble
+    container_name: devops-database
+    ports:
+      - 27017:27017
+    volumes:
+      - devops-db:/data/db
+
+volumes:
+  devops-db:
