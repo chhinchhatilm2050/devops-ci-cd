@@ -1,6 +1,6 @@
 import { handleCastError, handleDuplicateError } from "../utils/errorHandler.js";
 
-const globalErrorHandler = (err, req, res, next) => { 
+const globalErrorHandler = (err, req, res) => { 
     const isDev = process.env.NODE_ENV === 'development';
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
