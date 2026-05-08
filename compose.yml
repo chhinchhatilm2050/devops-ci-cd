@@ -1,23 +1,48 @@
 services:
+  load-balancer:
+    build: 
+      context: .
+      dockerfile: Docker.nginx
+    depends_on:
+      - express
+    environment:
+      - EXPRESS_HOST_1=devops-express-1
+      - EXPRESS_HOST_2=devops-express-2
+      - EXPRESS_HOST_3=devops-express-3
+      - EXPRESS_PORT=3000
+      - NGINX_SERVER_NAME=localhost
+      - NGINX_MAX_BODY=100M
+    ports:
+      - 3000:3000
+    networks:
+      - chhat-network
+
   express:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: express-container
-    command: npx nodemon src/server.js
+    command: npx nodemon --legacy-watch src/server.js  
     volumes:
       - ./src:/app/src
-      - ./.env:/app/.env
-    ports:
-      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - database
+    scale: 3
+    networks:
+      - chhat-network
 
   database:
     image: mongo:8.2.7-noble
     container_name: devops-database
     ports:
       - 27017:27017
+    networks:
+      - chhat-network
     volumes:
       - devops-db:/data/db
 
 volumes:
   devops-db:
+networks:
+  chhat-network:
