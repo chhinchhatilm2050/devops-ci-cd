@@ -1,5 +1,5 @@
-import { Router } from "express";
-import { getSummaryProduct, getProductPerCagetory, getProductTopRated } from "../controllers/statController.js";
+import { Router } from 'express';
+import { getSummaryProduct, getProductPerCagetory, getProductTopRated } from '../controllers/statController.js';
 
 const statRouter = Router();
 statRouter.get('/stats/summary', getSummaryProduct);

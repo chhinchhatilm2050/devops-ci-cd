@@ -14,8 +14,8 @@ app.use(requestLogger);
 app.use(express.json());
 
 app.get('/health', (req, res) => {
-  console.log("chhatdddddd");
-  console.log("tori");
+  console.log('chhatdd');
+  console.log('tori');
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),

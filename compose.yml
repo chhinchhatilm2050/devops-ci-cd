@@ -3,6 +3,7 @@ services:
     build: 
       context: .
       dockerfile: Docker.nginx
+    image: chhat/load-nginx:v1.1
     depends_on:
       - express
     environment:
@@ -21,6 +22,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: chhat/devops-express:v1.0
     command: npx nodemon --legacy-watch src/server.js  
     volumes:
       - ./src:/app/src
