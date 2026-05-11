@@ -1,10 +1,10 @@
-import { Router } from "express";
+import { Router } from 'express';
 import { 
-    createProduct, getProductWithAllQuery, 
-    getProductWithCursor, getProductByFeatured,
-    getProductBySearch, getSingleProduct,
-    updateProduct, deleteProduct, getProductOnsale
-} from "../controllers/productController.js";
+  createProduct, getProductWithAllQuery, 
+  getProductWithCursor, getProductByFeatured,
+  getProductBySearch, getSingleProduct,
+  updateProduct, deleteProduct, getProductOnsale
+} from '../controllers/productController.js';
 
 const productRouter = Router();
 productRouter.post('', createProduct);

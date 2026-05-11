@@ -8,6 +8,7 @@
     "dev": "nodemon src/server.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "generate": "node src/utils/fixtures.js"
   },
   "keywords": [],

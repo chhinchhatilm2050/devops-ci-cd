@@ -1,7 +1,7 @@
-import { Router } from "express";
-import  productRouter from "./productRoutes.js";
-import reviewRouter from "./reviewRoutes.js";
-import statRouter from "./statRoutes.js";
+import { Router } from 'express';
+import  productRouter from './productRoutes.js';
+import reviewRouter from './reviewRoutes.js';
+import statRouter from './statRoutes.js';
 
 const router = Router();
 router.use('/products', productRouter);
