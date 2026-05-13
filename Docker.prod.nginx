@@ -1,0 +1,10 @@
+FROM nginx:alpine
+
+RUN apk add --no-cache bash dos2unix
+
+COPY nginx/entrypoint-nginx.sh /entrypoint-nginx.sh
+COPY nginx/vhost.prod.template /etc/nginx/conf.d/vhost.template
+
+RUN dos2unix /entrypoint-nginx.sh && chmod +x /entrypoint-nginx.sh 
+
+ENTRYPOINT ["/entrypoint-nginx.sh"]
