@@ -17,7 +17,7 @@ services:
     ports:
       - 5000:3000
     networks:
-      - chhat-network-prod
+      - chhat-network
 
   express:
     build:
@@ -33,7 +33,7 @@ services:
     depends_on:
       - database
     networks:
-      - chhat-network-prod
+      - chhat-network
 
   database:
     image: mongo:8.2.7-noble
@@ -41,7 +41,7 @@ services:
     ports:
       - 27018:27017
     networks:
-      - chhat-network-prod
+      - chhat-network
     volumes:
       - devops-db-prod:/data/db
     environment:
@@ -49,7 +49,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}
 
 networks:
-  chhat-network-prod:
+  chhat-network:
 
 volumes:
   devops-db-prod:

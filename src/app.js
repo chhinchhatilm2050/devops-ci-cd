@@ -27,7 +27,7 @@ app.use(requestLogger);
 app.use(express.json());
 
 app.get('/health', (req, res) => {
-  console.log('Welcome chhinchhat');
+  console.log('Welcome chhinchhattt');
   res.status(200).json({
     status: 'healthy',
     timestamp: new Date().toISOString(),

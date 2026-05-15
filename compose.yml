@@ -16,7 +16,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - chhat-network-dev
+      - chhat-network
 
   express:
     build:
@@ -26,13 +26,14 @@ services:
     command: npx nodemon --legacy-watch src/server.js  
     volumes:
       - ./src:/app/src
+      - ./.env:/app/.env
     environment:
       - NODE_ENV=dev
     depends_on:
       - database
     scale: 2
     networks:
-      - chhat-network-dev
+      - chhat-network
 
   database:
     image: mongo:8.2.7-noble
@@ -40,11 +41,11 @@ services:
     ports:
       - 27017:27017
     networks:
-      - chhat-network-dev
+      - chhat-network
     volumes:
       - devops-db-dev:/data/db
 
 volumes:
   devops-db-dev:
 networks:
-  chhat-network-dev:
+  chhat-network:
