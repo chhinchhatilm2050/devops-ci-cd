@@ -1,0 +1,55 @@
+services:
+  Load-balancer:
+    build:
+      context: .
+      dockerfile: Docker.prod.nginx
+    image: chhat/nginx:v1.0          
+    container_name: load-balancer
+    depends_on:
+      - express
+    environment:
+      - EXPRESS_HOST_1=devop-prod-express-1
+      - EXPRESS_HOST_2=devop-prod-express-2
+      - EXPRESS_HOST_3=devop-prod-express-3
+      - EXPRESS_PORT=3000
+      - NGINX_SERVER_NAME=localhost
+      - NGINX_MAX_BODY=100M
+    ports:
+      - 5000:3000
+    networks:
+      - chhat-network
+
+  express:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: chhat/devops-express:v1.0
+    command: npx nodemon --legacy-watch src/server.js
+    volumes:
+      - ./src:/app/src
+    environment:
+      - NODE_ENV=prod
+    scale: 3                
+    depends_on:
+      - database
+    networks:
+      - chhat-network
+
+  database:
+    image: mongo:8.2.7-noble
+    container_name: devops-database-prod
+    ports:
+      - 27018:27017
+    networks:
+      - chhat-network
+    volumes:
+      - devops-db-prod:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASS}
+
+networks:
+  chhat-network:
+
+volumes:
+  devops-db-prod:

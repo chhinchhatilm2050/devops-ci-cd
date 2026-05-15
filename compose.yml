@@ -7,9 +7,9 @@ services:
     depends_on:
       - express
     environment:
-      - EXPRESS_HOST_1=devops-express-1
-      - EXPRESS_HOST_2=devops-express-2
-      - EXPRESS_HOST_3=devops-express-3
+      - EXPRESS_HOST_1=devops-dev-express-1
+      - EXPRESS_HOST_2=devops-dev-express-2
+
       - EXPRESS_PORT=3000
       - NGINX_SERVER_NAME=localhost
       - NGINX_MAX_BODY=100M
@@ -26,25 +26,26 @@ services:
     command: npx nodemon --legacy-watch src/server.js  
     volumes:
       - ./src:/app/src
-    env_file:
-      - .env
+      - ./.env:/app/.env
+    environment:
+      - NODE_ENV=dev
     depends_on:
       - database
-    scale: 3
+    scale: 2
     networks:
       - chhat-network
 
   database:
     image: mongo:8.2.7-noble
-    container_name: devops-database
+    container_name: devops-database-dev
     ports:
       - 27017:27017
     networks:
       - chhat-network
     volumes:
-      - devops-db:/data/db
+      - devops-db-dev:/data/db
 
 volumes:
-  devops-db:
+  devops-db-dev:
 networks:
   chhat-network:
